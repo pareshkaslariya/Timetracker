@@ -34,4 +34,6 @@ define('WORKEDSHIFT_API_CREATE_ERROR', 'Sorry, could not checkIn. Try again.');
 define('API_WORKEDSHIFT_CHECKOUT_NULL_CHECK', 'Sorry you already checked out at this location.');
 define('API_WORKEDSHIFT_CHECKIN_NULL_CHECK', 'Sorry you already checked in at this location.');
 define('API_WORKEDSHIFT_NO_DATA_FOUND', 'Sorry you are not clecked in at this location.');
+define('API_LOG_BAD_REQUEST_CODE', '404');
+
 /* Api WorkedShift END*/
