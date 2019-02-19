@@ -2,11 +2,10 @@
 
 namespace App;
 
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Laravel\Passport\HasApiTokens;
 use Validator;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
@@ -39,38 +38,34 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-	
-	
-	
 
-	  /**
-  * @author : ### ###
-  *
-  * Method name: apiValidateRegister
-  * Define for validate User pin.
-  *
-  * @param  {array} data - The data is array of User
-  * @return  array object of validate User
-  */
-  public static function apiValidateRegister($data) {
-    $rule = array(
-		'name' => 'required',
-		'email' => 'required|email',
-        'password' => 'required',
-        'c_password' => 'required|same:password',
-    );
-    $messages = array(
-      'required' => ':attribute field is required.',
-      'email' => ':attribute is valid email address.',
-    );
-    $data = Validator::make($data, $rule, $messages);
-    $data->setAttributeNames(array(
-      'name' => ucfirst('name'),
-	  'email' => ucfirst('email'),
-	  'password' => ucfirst('password'),
-	  'c_password' => ucfirst('c_password'),
-    ));
-    return $data;
-  }
-	
+    /**
+     * @author : ### ###
+     *
+     * Method name: apiValidateRegister
+     * Define for validate User pin.
+     *
+     * @param  {array} data - The data is array of User
+     * @return  array object of validate User
+     */
+    public static function apiValidateRegister($data)
+    {
+        $rule = array(
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+        );
+        $messages = array(
+            'required' => ':attribute field is required.',
+            'email' => ':attribute is valid email address.',
+        );
+        $data = Validator::make($data, $rule, $messages);
+        $data->setAttributeNames(array(
+            'name' => ucfirst('name'),
+            'email' => ucfirst('email'),
+            'password' => ucfirst('password'),
+        ));
+        return $data;
+    }
+
 }

@@ -1,12 +1,12 @@
 <?php
 
 /*
-* To change this template file, choose Tools | Templates
-* and open the template in the einvoiceditor.
-*/
- 
+ * To change this template file, choose Tools | Templates
+ * and open the template in the einvoiceditor.
+ */
+
 define('API_LOG_INFO_FIRST_KEYWORD', 'API');
- 
+
 define('API_LOG_NOT_FOUND_RECORD_CODE', 404);
 
 /*Employee work time Report*/
@@ -19,7 +19,6 @@ define('USERS_NOT_AVAILABLE', 'Sorry, could not found user. Try again.');
 define('LOCATION_TIMEZONE_NOT_GIVEN', 'Sorry, no data found time zone.');
 define('NO_WORK_SHIFT_DATA', 'No data found.');
 define('PERIOD_NOT_CALCULATED', 'Date range not calculated, please try again!');
-
 
 /* Api WorkedShift START*/
 define('WorkedShift_API_JSON_INVALID', 'Invalid JSON format.');

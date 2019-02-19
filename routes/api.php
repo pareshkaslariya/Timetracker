@@ -1,7 +1,5 @@
 <?php
-
 use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -11,32 +9,24 @@ use Illuminate\Http\Request;
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
-*/
+ */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::group(['as' => 'timetracker', 'prefix' => 'timetracker', 'middleware' => ['json.response']], function () {
 
-Route::group(['as' => 'timetracker', 'prefix' => 'timetracker', 'middleware' => [
-  // 'rest.api.auth',
-  // 'input.trim'
-  ]], function () {
-  
-  
-  /* START REGISTER API ROUTES*/
-	Route::post('register', 'Api\ApiRegisterController\ApiRegisterController@register');
-	/* END*/
+    Route::middleware('auth:api')->get('/user', function (Request $request) {
+        return $request->user();
+    });
 
-  /* WorkedShift api*/
-  Route::post('clock-in', 'Api\ApiWorkedShifts\ApiWorkedShiftsController@checkIn');
-  Route::post('clock-out', 'Api\ApiWorkedShifts\ApiWorkedShiftsController@checkOut');
-  /*END*/
-	
-	Route::middleware('auth:api')->get('/trueadd', function (Request $request) {
-   return true;
-});
+    // public routes
+    Route::post('/login', 'Api\AuthController@login')->name('login.api');
+    Route::post('/register', 'Api\AuthController@register')->name('register.api');
 
+    // private routes
+    Route::middleware('auth:api')->group(function () {
+        Route::get('/logout', 'Api\AuthController@logout')->name('logout');
 
-	
+        Route::post('clock-in', 'Api\ApiWorkedShifts\ApiWorkedShiftsController@checkIn');
+        Route::post('clock-out', 'Api\ApiWorkedShifts\ApiWorkedShiftsController@checkOut');
+    });
 
 });

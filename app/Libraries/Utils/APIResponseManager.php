@@ -8,11 +8,12 @@ namespace App\Libraries\Utils;
  * Create class for return response to api
  *
  */
-class APIResponseManager {
+class APIResponseManager
+{
 
     /**
- * @author : Meet parikh
- * Created on : #### ####
+     * @author : Meet parikh
+     * Created on : #### ####
      *
      * Create static variable.
      */
@@ -20,29 +21,31 @@ class APIResponseManager {
     public static $successResponse = array();
 
     /**
- * @author : Meet parikh
- * Created on : #### ####
+     * @author : Meet parikh
+     * Created on : #### ####
      *
      * Method name: getError
      * @param1 {string} message - The error massage of response.
      * @param2 {int} code - The error code of response.
      * @return error object.
      */
-    public static function getError($message, $code) {
+    public static function getError($message, $code)
+    {
         self::$errorResponse['error']['message'] = $message;
         self::$errorResponse['error']['code'] = $code;
         return self::$errorResponse;
     }
 
     /**
- * @author : Meet parikh
- * Created on : #### ####
+     * @author : Meet parikh
+     * Created on : #### ####
      *
      * Method name: getResult
      * @param1 {string} $data - The object of response.
      * @return success object.
      */
-    public static function getResult($data, $code = null) {
+    public static function getResult($data, $code = null)
+    {
         if ($code === null) {
             self::$successResponse = $data;
         } else {
